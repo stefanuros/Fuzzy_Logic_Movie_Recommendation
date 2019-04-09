@@ -1,3 +1,14 @@
+# Stefan Urosevic - 13su12 - 10146785
+# CISC 467 - Fuzzy Logic
+# Implementation
+
+# NOTE: You will need to install some python packages through pip. These are listed below
+
+# This is an implementation that, given a fuzzy set of movie ratings, suggests 
+# other movies that you may like. It uses ratings that other people have given 
+# movies and finds users with similar tastes. It then suggests movies that they 
+# liked. 
+
 import csv
 import math
 from random import shuffle, choice
@@ -10,6 +21,7 @@ import numpy as np
 movies = {}
 
 # Function to read CSV files
+# Takes a file name and spits out a list with the first row (headers) left out
 def readCSV(fn):
 	lis = []
 
@@ -21,7 +33,7 @@ def readCSV(fn):
 	return lis[1:]
 
 
-# Function that creates a list of id-movie combos into a dict
+# Function that uses a list of id-movie combos and makes it into a global dict
 def createMovieDict():
 	global movies
 
@@ -34,6 +46,8 @@ def createMovieDict():
 
 
 # Function to create a dictionary of users
+# Gets data from a csv file and outputs a dictionary of users
+# Each user has a dictionary of movies and ratings representing a fuzzy set
 def parseUsers():
 	# Get the user ratings
 	userRatings = readCSV('ml-latest-small/ratings.csv')
@@ -61,6 +75,8 @@ def parseUsers():
 	return users
 
 # Function to read in ratings from standard input
+# Gets input from the user running the program and outputs a dictionary that 
+# represents a fuzzy set of movie ratings
 def getInput():
 	print("Enter the name of a movie followed by a space then a rating from 0-5 stars, decimals are allowed")
 	print("Example: Toy Story 4.5")
@@ -104,6 +120,7 @@ def getInput():
 
 
 # The following 2 functions come from this website
+# These functions are for calculating the angle between 2 vectors
 # https://stackoverflow.com/questions/2827393/angles-between-two-n-dimensional-vectors-in-python/13849249#13849249
 
 # Returns the unit vector of vector
